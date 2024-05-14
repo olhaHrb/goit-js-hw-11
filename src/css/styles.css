@@ -5,15 +5,10 @@
   |============================
 */
 @import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
+  font-family: Montserrat, sans-serif;
   color: #242424;
   background-color: rgba(255, 255, 255, 0.87);
 
@@ -23,3 +18,44 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.form {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #2E2F42;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 36px;
+  margin-bottom: 32px;
+}
+
+label {
+  display: flex;
+}
+
+input {
+  width: 272px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  padding-left: 16px;
+}
+
+button {
+  width: 95px;
+  height: 40px;
+  color: #FFFFFF;
+  background-color: #4E75FF;
+  border: #4E75FF;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5; /* 150% */
+  letter-spacing: 0.64px;
+}
+
+.loading-message {
+  text-align: center;
+}
+
