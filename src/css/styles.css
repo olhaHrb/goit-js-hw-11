@@ -55,7 +55,28 @@ button {
   letter-spacing: 0.64px;
 }
 
-.loading-message {
+.loader {
   text-align: center;
 }
 
+.loader.is-hidden {
+  opacity: 0;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 32px;
+}
+
+.gallery-item {
+  list-style-type: none;
+  max-height: 200px;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 100%;
+}

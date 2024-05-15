@@ -12,19 +12,18 @@
     rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css" />
   <script type="module" src="./main.js"></script>
-  <script type="module" src="js/render-functions.js"></script>
+  <!--  <script type="module" src="js/render-functions.js"></script> -->
+  <!-- <script type="module" src="js/pixabay-api.js"></script> -->
 </head>
 
 <body>
 
   <form class="form" autocomplete="off">
-    <label>
-      <input type="text" name="searchInput" autofocus placeholder="Search images..." />
-    </label>
+    <input name="searchInput" autofocus placeholder="Search images..." />
     <button type="submit">Search</button>
   </form>
 
-  <span class="loading-message">
+  <span class="loader position is-hidden">
     <p>Loading images, please wait...</p>
   </span>
 
