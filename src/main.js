@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '43873427-52524e51f424820d3ed845203';
 const params = `?key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true`;
@@ -48,11 +51,11 @@ function onFetchError(error) {
 
 function renderImageCard(result) {
     const imgCreate = result.hits;
-    const createMarkup = imgCreate.map(({ webformatURL, likes, views, comments, downloads }) => {
+    const createMarkup = imgCreate.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
         return (`
         <li class="gallery-item">
-            <a class="gallery-link" href=${webformatURL}>
-                <img class="gallery-image" src=${webformatURL} alt="photo" />
+            <a class="gallery-link" href=${largeImageURL}>
+                <img class="gallery-image" src=${webformatURL} alt=${tags} />
             </a>
             <ul class="gallery-caption">
               <li class="caption-item">
@@ -76,8 +79,10 @@ function renderImageCard(result) {
     }).join(''); 
     galleryContainer.innerHTML = createMarkup;
 };
-
-
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: "alt",
+  captionsDelay: 250
+});
 
 
 
