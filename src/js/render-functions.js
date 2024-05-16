@@ -1,3 +1,16 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: "alt",
+  captionsDelay: 250
+});
+
+const galleryContainer = document.querySelector(".gallery");
+
+
 export function renderImageCard(result) {
   const imgCreate = result.hits;
   if (imgCreate.length === 0) {
@@ -31,6 +44,7 @@ export function renderImageCard(result) {
             </ul>
         </li>`)
     }).join('');
-    galleryContainer.innerHTML = createMarkup;
+      galleryContainer.innerHTML = createMarkup;
+      lightbox.refresh();
   };
 };
