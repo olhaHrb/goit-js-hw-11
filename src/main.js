@@ -1,5 +1,7 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '43873427-52524e51f424820d3ed845203';
@@ -32,15 +34,17 @@ function onSearch(event) {
     fetchImg(imagesEach)
      .then(image => {
        renderImageCard(image);
-     })
-     .catch(error => {
-        console.log(error);
-        onFetchError(error);
+     }) 
+        .catch (error => {
+          onFetchError(error);
      })
      .finally(() => {
         form.reset();
         loader.classList.add('is-hidden');
      });
+    } else {
+      console.log("поле для пошуку має бути заповненим");
+      loader.classList.add('is-hidden');
     }
    
 };
@@ -50,9 +54,15 @@ function onFetchError(error) {
 }
 
 function renderImageCard(result) {
-    const imgCreate = result.hits;
+  
+  const imgCreate = result.hits;
+  if (imgCreate.length === 0) {
+    iziToast.error({
+      message: (`Sorry, there are no images matching your search query. Please try again!`),
+    });
+  } else {
     const createMarkup = imgCreate.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        return (`
+      return (`
         <li class="gallery-item">
             <a class="gallery-link" href=${largeImageURL}>
                 <img class="gallery-image" src=${webformatURL} alt=${tags} />
@@ -76,13 +86,14 @@ function renderImageCard(result) {
               </li>
             </ul>
         </li>`)
-    }).join(''); 
+    }).join('');
     galleryContainer.innerHTML = createMarkup;
+  };
 };
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: "alt",
   captionsDelay: 250
 });
 
-
+//lightbox.refresh();
 
