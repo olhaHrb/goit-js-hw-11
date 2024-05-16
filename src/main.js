@@ -6,6 +6,10 @@ import "izitoast/dist/css/iziToast.min.css";
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '43873427-52524e51f424820d3ed845203';
 const params = `?key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true`;
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: "alt",
+  captionsDelay: 250
+});
 
 function fetchImg(imageId) {
   return fetch(`${BASE_URL}${params}&q=${imageId}`).then(response => {
@@ -34,6 +38,7 @@ function onSearch(event) {
     fetchImg(imagesEach)
      .then(image => {
        renderImageCard(image);
+       lightbox.refresh();
      }) 
         .catch (error => {
           onFetchError(error);
@@ -43,7 +48,7 @@ function onSearch(event) {
         loader.classList.add('is-hidden');
      });
     } else {
-      console.log("поле для пошуку має бути заповненим");
+//      console.log("поле для пошуку має бути заповненим");
       loader.classList.add('is-hidden');
     }
    
@@ -90,10 +95,6 @@ function renderImageCard(result) {
     galleryContainer.innerHTML = createMarkup;
   };
 };
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: "alt",
-  captionsDelay: 250
-});
 
-//lightbox.refresh();
+
 
