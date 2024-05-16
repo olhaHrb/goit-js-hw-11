@@ -11,7 +11,7 @@ function fetchImg(imageId) {
     }
     return response.json();
   });
-}
+};
 
 const galleryContainer = document.querySelector(".gallery");
 const formEach = document.querySelector(".form");
@@ -20,10 +20,10 @@ const loader = document.querySelector('.loader');
 formEach.addEventListener("submit", onSearch);
     
 function onSearch(event) {
-    event.preventDefault();
-    loader.classList.remove('is-hidden');
-    const form = event.currentTarget;
-    const imagesEach = form.elements.searchInput.value;
+  event.preventDefault();
+  loader.classList.remove('is-hidden');
+  const form = event.currentTarget;
+  const imagesEach = form.elements.searchInput.value;
 
     if (!imagesEach =="") {
     fetchImg(imagesEach)
@@ -48,12 +48,30 @@ function onFetchError(error) {
 
 function renderImageCard(result) {
     const imgCreate = result.hits;
-    const createMarkup = imgCreate.map(({ webformatURL }) => {
+    const createMarkup = imgCreate.map(({ webformatURL, likes, views, comments, downloads }) => {
         return (`
         <li class="gallery-item">
             <a class="gallery-link" href=${webformatURL}>
                 <img class="gallery-image" src=${webformatURL} alt="photo" />
             </a>
+            <ul class="gallery-caption">
+              <li class="caption-item">
+                <h3 class="caption-title">Likes</h3>
+                <p class="caption-value">${likes}</p>
+              </li>
+              <li class="caption-item">
+                <h3 class="caption-title">Views</h3>
+                <p class="caption-value">${views}</p>
+              </li>
+              <li class="caption-item">
+                <h3 class="caption-title">Comments</h3>
+                <p class="caption-value">${comments}</p>
+              </li>
+              <li class="caption-item">
+                <h3 class="caption-title">Downloads</h3>
+                <p class="caption-value">${downloads}</p>
+              </li>
+            </ul>
         </li>`)
     }).join(''); 
     galleryContainer.innerHTML = createMarkup;
