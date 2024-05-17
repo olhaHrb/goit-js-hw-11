@@ -14,6 +14,7 @@ const galleryContainer = document.querySelector(".gallery");
 export function renderImageCard(result) {
   const imgCreate = result.hits;
   if (imgCreate.length === 0) {
+    galleryContainer.innerHTML="";
     iziToast.error({
       message: (`Sorry, there are no images matching your search query. Please try again!`),
     });

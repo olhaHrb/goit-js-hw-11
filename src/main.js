@@ -9,24 +9,24 @@ function onSearch(event) {
   event.preventDefault();
   loader.classList.remove('is-hidden');
   const form = event.currentTarget;
-  const imagesEach = form.elements.searchInput.value;
+  const searchQuery = form.elements.searchInput.value.trim();
 
-    if (!imagesEach =="") {
-    fetchImg(imagesEach)
-     .then(image => {
-       renderImageCard(image);
-//       lightbox.refresh();
-     }) 
-        .catch (error => {
-          onFetchError(error);
-     })
-     .finally(() => {
-        form.reset();
-        loader.classList.add('is-hidden');
-     });
-    } else {
+  if (searchQuery === "") { 
+    loader.classList.add('is-hidden');
+    return;
+  };   
+
+  fetchImg(searchQuery)
+    .then(image => {
+      renderImageCard(image);
+    }) 
+    .catch (error => {
+      onFetchError(error);
+    })
+    .finally(() => {
+      form.reset();
       loader.classList.add('is-hidden');
-    }
+    });
 };
 function onFetchError(error) {
   alert(error);
